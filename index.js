@@ -26,8 +26,8 @@
  * Dica: você pode acrescentar novas configurações aqui se precisar.
  **/
 const app = {
-    siteName: 'FrontEndeiros',
-    siteSlogan: 'Programando para o futuro',
+    siteName: 'LearnBasicJS',
+    siteSlogan: 'Aprenda tópicos basicos de JavaScript',
     apiBaseURL: 'http://localhost:8080/'
 }
 

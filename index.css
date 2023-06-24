@@ -70,8 +70,9 @@ a {
     color: #4682b4;
     text-decoration: none;
 }
-#logo-main img{
-    width: 30px;
+.logo-main{
+    margin-right: 1rem;
+    width: 100px;
     height: auto;
 }
 
@@ -188,7 +189,8 @@ body {
 }
 
 /* Barra de Pesquisa da home. */
-input.search-input{
+input.search-form{
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     width: 800px;

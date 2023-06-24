@@ -6,10 +6,11 @@ function myView() {
     // Se o ID não for um número, redireciona para a página de erro 404
     if (isNaN(articleId)) loadpage('e404')
     // Faz uma requisição GET para obter o artigo correspondente ao ID 
+    console.log(app.apiBaseURL + 'articles/' + articleId)
     $.get(app.apiBaseURL + 'articles/' + articleId)
         .done((data) => {
 
-            if(data.status == 'not-found') loadpage('e404')
+            // if(data.status == 'not-found') loadpage('e404')
 
 
             
@@ -22,17 +23,17 @@ function myView() {
             // atualiza o coteúdo do artigo na página
             $('#artContent').html(artData.content)
             // atualiza o contador de visualizações do artigo
-            updateViews(artData)
+            //updateViews(artData)
             // atualiza o título da página com o título o artigo.
-            //changeTitle(artData.title)
+            changeTitle(artData.title)
             // obtém as informações do autor do artigo
             //getAuthor(artData)
             // obtém os artigos do mesmo autor
             //getAuthorArticles(artData, 5)
             // obtém o formulário de comentários do usuário
-            //getUserCommentForm(artData)
+            getUserCommentForm(artData)
             // obtém os comentários do artigo
-            //getArticleComments(artData, 999)
+            getArticleComments(artData, 999)
         })
 
         .fail((error) => {
@@ -112,18 +113,7 @@ function getArticleComments(artData, limit) {
 
     var commentList = ''
     // Usa a função jQuary $.get para buscar os comentários do artigo e partir da API, com os parâmetros definidos abaixo:
-    $.get(app.apiBaseURL + 'comments', {
-        //Filtro pelo artigo atual
-        article: artData.id,
-        // Apenas comentários publicados (status = "on") 
-        status: 'on',
-        // Ordena por data       
-        _sort: 'date',
-        // Ordena em ordem decrecente.       
-        _order: 'desc',
-        // Limita a quantidade de comentários (padrão = 999)     
-        _limit: limit || 999
-    })
+    $.get(app.apiBaseURL + `comments/${artData.id}`)
         // Se a busca for bem-sucedida, executaa função abaixo:
         .done((cmtData) => {
             if (cmtData.length > 0) {
@@ -183,45 +173,48 @@ function getUserCommentForm(artData) {
 function sendComment(event, artData, userData) {
 
     event.preventDefault()
-    var content = stripHtml($('#txtContent').val().trim())
+    var content = stripHTML($('#txtContent').val().trim())
     $('#txtContent').val(content)
     if (content == '') return false
-
     const today = new Date()
     sysdate = today.toISOString().replace('T', ' ').split('.')[0]
+    request = app.apiBaseURL + `comments/find?uid=${userData.uid}&art=${artData.id}&txt=${content}`;
 
-    $.get(app.apiBaseURL + 'comments', {
-        uid: userData.uid,
-        content: content,
-        article: artData.id
-    })
+    $.get(request)
         .done((data) => {
             if (data.length > 0) {
                 popUp({ type: 'error', text: 'Ooops! Este comentário já foi enviado antes...' })
                 return false
             } else {
-
                 const formData = {
                     name: userData.displayName,
                     photo: userData.photoURL,
                     email: userData.email,
                     uid: userData.uid,
                     article: artData.id,
-                    content: content,
+                    comment: content,
                     date: sysdate,
                     status: 'on'
                 }
 
-                $.post(app.apiBaseURL + 'comments', formData)
-                    .done((data) => {
+                $.ajax({
+                    type: "POST",
+                    url: app.apiBaseURL + 'comments',
+                    data: JSON.stringify(formData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
                         if (data.id > 0) {
                             popUp({ type: 'success', text: 'Seu comentário foi enviado com sucesso!' })
                             loadpage('view')
                         }
-                    })
-                    .fail((err) => {
-                        console.error(err)
-                    })
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        popUp({ type: 'error', text: 'Ocorreram falhas ao enviar. Tente mais tarde.' })
+                        loadpage('view')
+                    }
+                });
 
             }
         })
