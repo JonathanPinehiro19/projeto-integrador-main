@@ -170,6 +170,7 @@ function getUserCommentForm(artData) {
 
 }
 
+
 function sendComment(event, artData, userData) {
 
     event.preventDefault()
@@ -205,21 +206,19 @@ function sendComment(event, artData, userData) {
                     dataType: "json",
                     success: function (data) {
                         if (data.id > 0) {
-                            popUp({ type: 'success', text: 'Seu comentário foi enviado com sucesso!' })
-                            loadpage('view')
-                        }
-                    },
-                    error: function (err) {
-                        console.log(err);
-                        popUp({ type: 'error', text: 'Ocorreram falhas ao enviar. Tente mais tarde.' })
-                        loadpage('view')
-                    }
-                });
-
+                popUp({ type: 'success', text: 'Seu comentário foi enviado com sucesso!' });
+                loadpage('view');
+              }
+            },
+            error: function (err) {
+              console.log(err);
+              popUp({ type: 'error', text: 'Ocorreram falhas ao enviar. Tente mais tarde.' });
+              loadpage('view');
             }
-        })
-
-}
+          });
+        }
+      });
+  }
 
 function updateViews(artData) {
     $.ajax({
