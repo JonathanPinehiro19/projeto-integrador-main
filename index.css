@@ -71,6 +71,7 @@ a {
     text-decoration: none;
 }
 .logo-main{
+    padding: auto;
     margin-right: 1rem;
     width: 100px;
     height: auto;
