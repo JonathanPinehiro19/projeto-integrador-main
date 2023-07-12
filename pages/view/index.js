@@ -119,7 +119,7 @@ function getArticleComments(artData, limit) {
             if (cmtData.length > 0) {
                 // Cria uma lista de comentários com as informações de cada comentário encontrado
                 cmtData.forEach((cmt) => {
-                    var content = cmt.content.split("\n").join("<br>")
+                    var content = cmt.comment.split("\n").join("<br>")
                     commentList += `
                         <div class="cmtBox">
                             <div class="cmtMetadata">

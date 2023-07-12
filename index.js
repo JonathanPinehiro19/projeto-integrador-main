@@ -380,7 +380,7 @@ function loadArticle() {
 /**
  * Sanitiza um texto, removendo todas as tags HTML.
  **/
- function stripHtml(html) {
+ function stripHTML(html) {
     let doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || "";
 }
@@ -513,7 +513,7 @@ function getUsersTeam(limit) {
 
             $('#usersGrid').html(htmlOut)
 
-            $('.userclick').click(openProfile)
+            // $('.userclick').click(openProfile)
 
 
         })

@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+#aside {
+  
+}
+
 #artMetadata {
     display: flex;
     justify-content: flex-end;

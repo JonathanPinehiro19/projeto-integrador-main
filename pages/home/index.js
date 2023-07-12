@@ -66,26 +66,26 @@ function getMostViewed(limit) {
 
 }
 
-function getLastComments(limit) {
+// function getLastComments(limit) {
 
-    var htmlOut = ''
+//     var htmlOut = ''
 
-    $.get(app.apiBaseURL + `comments/last/${limit}`)
-        .done((data) => {
-            if (data.length > 0) {
-                htmlOut = '<ul>'
-                data.forEach((item) => {
-                    htmlOut += `<li class="article" data-id="${item.article}">${item.content.truncate(45)}</li>`
-                })
-                htmlOut += '</ul>'
-            } else {
-                htmlOut = '<p class="center">Nenhum comentário ainda.</p>'
-            }
+//     $.get(app.apiBaseURL + `comments/last/${limit}`)
+//         .done((data) => {
+//             if (data.length > 0) {
+//                 htmlOut = '<ul>'
+//                 data.forEach((item) => {
+//                     htmlOut += `<li class="article" data-id="${item.article}">${item.content}</li>`
+//                 })
+//                 htmlOut += '</ul>'
+//             } else {
+//                 htmlOut = '<p class="center">Nenhum comentário ainda.</p>'
+//             }
 
-            $('#lastComments').html(htmlOut)
-        })
-        .fail((error) => {
-            $('#lastComments').html('<p class="center">Nenhum comentário ainda.</p>')
-        })
+//             $('#lastComments').html(htmlOut)
+//         })
+//         .fail((error) => {
+//             $('#lastComments').html('<p class="center">Nenhum comentário ainda.</p>')
+//         })
 
-}
+// }
