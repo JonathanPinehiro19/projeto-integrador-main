@@ -531,3 +531,11 @@ function openProfile() {
 //     $.get(app.apiBaseURL + 'articles' + 'search' + {"/search/{id}}"});
 // }
 
+function find(event) {
+    sessionStorage.findTerm = undefined;
+    event.preventDefault();
+    findTerm = $('#findTerm').val().trim();
+    if(findTerm == '') return false;
+    sessionStorage.findTerm = findTerm;
+    loadpage('search');
+}

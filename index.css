@@ -67,10 +67,11 @@ body {
 /* Links em geral */
 
 a {
-    color: #4682b4;
+    color: #a77ee9;
     text-decoration: none;
 }
-.logo-main{
+
+.logo-main {
     padding: auto;
     margin-right: 1rem;
     width: 100px;
@@ -78,7 +79,7 @@ a {
 }
 
 a:hover {
-    color: #ff4500;
+    color: white;
     text-decoration: underline;
 }
 
@@ -190,23 +191,12 @@ body {
 }
 
 /* Barra de Pesquisa da home. */
-input.search-form{
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    width: 800px;
-}
 
-input.search-button {
-    size: 50%;
-    border: none;
-    background-image: linear-gradient(rgb(146, 102, 187), #a77ee9);
-    color: white;
-    padding: .5rem 1rem;
-    margin-top: .25rem;
-    cursor: pointer;
 
-}
+
+/* background-image: linear-gradient(rgb(146, 102, 187), #a77ee9); */
+
+
 
 
 /************/
@@ -599,4 +589,50 @@ form button:disabled {
         min-width: 220px;
     }
 
+}
+
+
+
+/* searchForm */
+
+.searchForm {
+
+    display: flex;
+    align-items: center;
+}
+
+.searchForm input {
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: 1rem;
+    height: 2rem;
+}
+
+.searchForm button {
+    background-image: linear-gradient(rgb(146, 102, 187), #a77ee9);
+
+
+}
+
+.search-form-home {
+    display: flex;
+    align-items: center;
+}
+
+.search-form-home input {
+    background-color:#2F4F4F;
+    border:solid 1px;
+    border-radius:15px;
+    width:300px;
+}
+
+.search-form-home button {
+    float: left;
+    background-color: transparent;
+    padding-left: 5px;
+    font-style: italic;
+    font-size: 18px;
+    border: none;
+    height: 32px;
+    width: 260px;
 }
