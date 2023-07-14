@@ -33,7 +33,7 @@ function myHome() {
             })
             $('#artList').html(articleList)
 
-            getMostViewed(5)
+            getMostViewed(3)
             getLastComments(5)
         })
         .fail((error) => {
