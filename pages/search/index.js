@@ -8,17 +8,31 @@ function mySearch() {
     findTerm = sessionStorage.findTerm
 
     if(findTerm !== undefined) {
-
+        var articleList = '';
 
         $.get(app.apiBaseURL + `articles/find?q=${findTerm}`)
-        .done((response) => {
-            console.log(response)
+        .done((data) => {
+            data.forEach((art) => {
+                articleList += `
+                    <div class="article art-item" data-id="${art.id}">
+                        <img src="${art.thumbnail}" alt="${art.title}">
+                        <div>
+                            <h3>${art.title}</h3>
+                            <p>${art.resume}</p>
+                        </div>
+                    </div>                    
+                `
+            })
+            $('#artList').html(articleList)
+
         })
-        
+        .fail((error) => {
+            $('#artList').html('<p class="center">Oooops! Não encontramos nenhum artigo...</p>')
+        })
     }
     
 
-    changeTitle()
+    
 
     // var recipeList = '';
 

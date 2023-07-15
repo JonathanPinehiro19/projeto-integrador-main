@@ -33,8 +33,7 @@ function myHome() {
             })
             $('#artList').html(articleList)
 
-            getMostViewed(5)
-            getLastComments(5)
+            getMostViewed(3)
         })
         .fail((error) => {
             $('#artList').html('<p class="center">Oooops! Não encontramos nenhum artigo...</p>')
